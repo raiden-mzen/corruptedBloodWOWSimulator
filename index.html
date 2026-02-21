@@ -9,7 +9,6 @@
   :root {
     --blood: #8b0000;
     --blood-bright: #cc1111;
-    --blood-glow: #ff2222;
     --gold: #c9a84c;
     --gold-bright: #f0c96a;
     --stone: #1a1612;
@@ -17,592 +16,739 @@
     --stone-light: #3a3330;
     --text: #d4c9b8;
     --text-dim: #8a7d6e;
-    --healthy: #2a5c2a;
-    --healthy-bright: #4aaa4a;
-    --infected: #8b0000;
-    --infected-bright: #ff2222;
-    --recovered: #2a3a5c;
-    --recovered-bright: #4a7aaa;
-    --dead: #1a1a1a;
-    --exposed: #6b4400;
-    --exposed-bright: #cc8800;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { margin:0; padding:0; box-sizing:border-box; }
   body {
     background: var(--stone);
     color: var(--text);
     font-family: 'Crimson Pro', serif;
     min-height: 100vh;
-    overflow-x: hidden;
-    background-image: 
+    background-image:
       radial-gradient(ellipse at 20% 50%, rgba(139,0,0,0.08) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
   header {
     text-align: center;
-    padding: 2.5rem 1rem 1.5rem;
-    position: relative;
+    padding: 2rem 1rem 1.2rem;
     border-bottom: 1px solid rgba(201,168,76,0.2);
+    position: relative;
   }
-
-  header::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 300px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  header::after {
+    content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+    width:300px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
   }
-
-  .skull { font-size: 1.4rem; margin: 0 0.5rem; opacity: 0.7; }
-
   h1 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    color: var(--blood-bright);
-    text-shadow: 0 0 30px rgba(204,17,17,0.5), 0 0 60px rgba(204,17,17,0.2);
-    line-height: 1.1;
+    font-family:'Cinzel',serif;font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:900;
+    color:#cc1111;text-shadow:0 0 30px rgba(204,17,17,0.5),0 0 60px rgba(204,17,17,0.2);
+    letter-spacing:0.08em;
   }
-
-  .subtitle {
-    font-size: 1rem;
-    color: var(--gold);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-    font-weight: 300;
-  }
-
-  .badge {
-    display: inline-block;
-    margin-top: 0.6rem;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    letter-spacing: 0.15em;
-    border: 1px solid rgba(201,168,76,0.2);
-    padding: 0.2rem 0.8rem;
-    border-radius: 2px;
-  }
+  .subtitle { font-size:0.9rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.3rem; }
+  .badge { display:inline-block;margin-top:0.4rem;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.12em;border:1px solid rgba(201,168,76,0.2);padding:0.15rem 0.7rem;border-radius:2px; }
 
   .layout {
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 0;
-    max-width: 1300px;
+    grid-template-columns: 290px 1fr;
+    gap: 1.2rem;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 1.5rem;
-    gap: 1.5rem;
+    padding: 1.2rem;
   }
+  @media(max-width:950px){ .layout{ grid-template-columns:1fr; } }
 
-  @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; }
-  }
+  .panel { background:var(--stone-mid);border:1px solid rgba(201,168,76,0.15);border-radius:4px;overflow:hidden;margin-bottom:1rem; }
+  .panel:last-child{ margin-bottom:0; }
+  .panel-header { background:rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.15);padding:0.55rem 0.9rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase; }
+  .panel-body { padding:0.9rem; }
 
-  /* PANEL */
-  .panel {
-    background: var(--stone-mid);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 4px;
-    overflow: hidden;
-  }
+  .control-group { margin-bottom:1rem; }
+  .control-label { display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;font-size:0.8rem;color:var(--text-dim); }
+  .control-value { font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold-bright); }
 
-  .panel-header {
-    background: rgba(201,168,76,0.08);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
-    padding: 0.7rem 1rem;
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+  input[type=range] { width:100%;height:3px;appearance:none;background:var(--stone-light);border-radius:2px;outline:none;cursor:pointer; }
+  input[type=range]::-webkit-slider-thumb { appearance:none;width:13px;height:13px;background:var(--gold);border-radius:50%;box-shadow:0 0 6px rgba(201,168,76,0.5);cursor:pointer; }
 
-  .panel-body { padding: 1rem; }
+  .btn { width:100%;padding:0.6rem;border:1px solid;border-radius:3px;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.12em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;margin-bottom:0.4rem; }
+  .btn-primary { background:var(--blood);border-color:#cc1111;color:#fff; }
+  .btn-primary:hover { background:#cc1111;box-shadow:0 0 15px rgba(204,17,17,0.4); }
+  .btn-secondary { background:transparent;border-color:rgba(201,168,76,0.3);color:var(--gold); }
+  .btn-secondary:hover { background:rgba(201,168,76,0.1);border-color:var(--gold); }
 
-  /* CONTROLS */
-  .control-group { margin-bottom: 1.2rem; }
+  .stat-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-bottom:0.8rem; }
+  .stat-card { background:var(--stone);border-radius:3px;padding:0.5rem;text-align:center;border:1px solid transparent; }
+  .stat-card.s{ border-color:rgba(74,170,74,0.3); } .stat-card.e{ border-color:rgba(204,136,0,0.3); }
+  .stat-card.i{ border-color:rgba(204,17,17,0.3); } .stat-card.r{ border-color:rgba(74,122,170,0.3); }
+  .stat-card.d{ border-color:rgba(80,80,80,0.3); }
+  .stat-num { font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;line-height:1; }
+  .stat-card.s .stat-num{color:#4aaa4a} .stat-card.e .stat-num{color:#cc8800}
+  .stat-card.i .stat-num{color:#ff2222} .stat-card.r .stat-num{color:#4a7aaa}
+  .stat-card.d .stat-num{color:#888}
+  .stat-label { font-size:0.6rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.15rem; }
 
-  .control-label {
+  .day-counter { text-align:center;margin-bottom:0.8rem; }
+  .day-num { font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;color:var(--gold-bright);text-shadow:0 0 15px rgba(201,168,76,0.3);line-height:1; }
+  .day-lbl { font-size:0.6rem;color:var(--text-dim);letter-spacing:0.2em;text-transform:uppercase; }
+
+  select { width:100%;background:var(--stone);border:1px solid rgba(201,168,76,0.2);color:var(--text);padding:0.35rem 0.5rem;border-radius:3px;font-family:'Crimson Pro',serif;font-size:0.85rem;cursor:pointer;outline:none;margin-bottom:0.5rem; }
+
+  /* Behavior bars */
+  .behavior-grid { display:grid;gap:0.5rem; }
+  .brow { display:flex;align-items:center;gap:0.5rem;font-size:0.78rem; }
+  .brow-label { width:90px;color:var(--text-dim);flex-shrink:0;font-size:0.72rem; }
+  .brow-bar-wrap { flex:1;height:6px;background:var(--stone);border-radius:3px;overflow:hidden; }
+  .brow-bar { height:100%;border-radius:3px;transition:width 0.4s ease; }
+  .brow-pct { width:30px;text-align:right;font-family:'Cinzel',serif;font-size:0.65rem;color:var(--gold-bright); }
+
+  /* Age bars */
+  .age-grid { display:grid;gap:0.4rem; }
+  .age-row { display:grid;grid-template-columns:80px 1fr 40px 40px;align-items:center;gap:0.4rem;font-size:0.72rem; }
+  .age-label { color:var(--text-dim); }
+  .age-bar-wrap { height:5px;background:var(--stone);border-radius:2px;overflow:hidden; }
+  .age-bar { height:100%;border-radius:2px;transition:width 0.4s; }
+  .age-infected { text-align:right;font-family:'Cinzel',serif;font-size:0.65rem;color:#ff4444; }
+  .age-dead { text-align:right;font-family:'Cinzel',serif;font-size:0.65rem;color:#888; }
+
+  /* Event log */
+  .event-log { max-height:110px;overflow-y:auto;font-size:0.72rem;line-height:1.6; }
+  .event-log::-webkit-scrollbar { width:3px; }
+  .event-log::-webkit-scrollbar-track { background:var(--stone); }
+  .event-log::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.3); }
+  .log-entry { padding:0.1rem 0;border-bottom:1px solid rgba(201,168,76,0.06); }
+  .log-entry.warn { color:#cc8800; }
+  .log-entry.danger { color:#cc1111; }
+  .log-entry.good { color:#4aaa4a; }
+  .log-entry.info { color:var(--text-dim); }
+
+  .right-col { display:flex;flex-direction:column;gap:1rem; }
+
+  #map-container { position:relative;background:#0d0b09;border:1px solid rgba(201,168,76,0.15);border-radius:4px;overflow:hidden; }
+  #map-canvas { display:block;width:100%; }
+  .map-overlay { position:absolute;top:0.6rem;left:0.6rem;font-family:'Cinzel',serif;font-size:0.6rem;color:rgba(201,168,76,0.45);letter-spacing:0.12em;text-transform:uppercase;pointer-events:none; }
+
+  .chart-wrap { display:grid;grid-template-columns:1fr 1fr;gap:0.8rem; }
+  @media(max-width:700px){ .chart-wrap{ grid-template-columns:1fr; } }
+
+  .chart-title { font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:0.3rem;text-transform:uppercase; }
+  canvas.chart { display:block;width:100%; }
+
+  .status-bar { text-align:center;padding:0.4rem;font-size:0.78rem;font-style:italic;color:var(--text-dim);border-top:1px solid rgba(201,168,76,0.1);min-height:2rem; }
+
+  .r0-display { text-align:center;margin-bottom:0.6rem; }
+  .r0-num { font-family:'Cinzel',serif;font-size:1.5rem;color:#ff8800;font-weight:700; }
+  .r0-lbl { font-size:0.6rem;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase; }
+  .r0-note { font-size:0.68rem;color:var(--text-dim);font-style:italic;margin-top:0.2rem; }
+
+  .legend { display:flex;flex-wrap:wrap;gap:0.4rem 0.8rem;margin-bottom:0.5rem; }
+  .legend-item { display:flex;align-items:center;gap:0.3rem;font-size:0.72rem;color:var(--text-dim); }
+  .ldot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+
+  .info-box { background:rgba(139,0,0,0.08);border:1px solid rgba(139,0,0,0.2);border-radius:3px;padding:0.6rem;font-size:0.75rem;color:var(--text-dim);line-height:1.5;font-style:italic;margin-top:0.6rem; }
+
+  /* ── PLAYBACK CONTROLS ── */
+  .playback-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.4rem;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-  }
-
-  .control-value {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    color: var(--gold-bright);
-  }
-
-  input[type=range] {
-    width: 100%;
-    height: 4px;
-    appearance: none;
-    background: var(--stone-light);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-  }
-
-  input[type=range]::-webkit-slider-thumb {
-    appearance: none;
-    width: 14px; height: 14px;
-    background: var(--gold);
-    border-radius: 50%;
-    box-shadow: 0 0 8px rgba(201,168,76,0.5);
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  input[type=range]::-webkit-slider-thumb:hover { background: var(--gold-bright); }
-
-  .btn {
-    width: 100%;
-    padding: 0.7rem;
-    border: 1px solid;
-    border-radius: 3px;
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-
-  .btn-primary {
-    background: var(--blood);
-    border-color: var(--blood-bright);
-    color: #fff;
-  }
-  .btn-primary:hover {
-    background: var(--blood-bright);
-    box-shadow: 0 0 15px rgba(204,17,17,0.4);
-  }
-  .btn-secondary {
-    background: transparent;
-    border-color: rgba(201,168,76,0.3);
-    color: var(--gold);
-  }
-  .btn-secondary:hover {
-    background: rgba(201,168,76,0.1);
-    border-color: var(--gold);
-  }
-
-  /* STATS */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .stat-card {
+    padding: 0.7rem 0.9rem;
     background: var(--stone);
-    border-radius: 3px;
-    padding: 0.6rem;
-    text-align: center;
-    border: 1px solid transparent;
-    transition: border-color 0.3s;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    flex-wrap: wrap;
   }
-
-  .stat-card.s { border-color: rgba(74,170,74,0.3); }
-  .stat-card.e { border-color: rgba(204,136,0,0.3); }
-  .stat-card.i { border-color: rgba(204,17,17,0.3); }
-  .stat-card.r { border-color: rgba(74,122,170,0.3); }
-  .stat-card.d { border-color: rgba(80,80,80,0.3); }
-
-  .stat-num {
-    font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .stat-card.s .stat-num { color: var(--healthy-bright); }
-  .stat-card.e .stat-num { color: var(--exposed-bright); }
-  .stat-card.i .stat-num { color: var(--infected-bright); }
-  .stat-card.r .stat-num { color: var(--recovered-bright); }
-  .stat-card.d .stat-num { color: #888; }
-
-  .stat-label {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.2rem;
-  }
-
-  .day-counter {
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    margin-bottom: 1rem;
-  }
-
-  .day-num {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--gold-bright);
-    text-shadow: 0 0 15px rgba(201,168,76,0.3);
-    line-height: 1;
-  }
-
-  .day-lbl {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  /* LEGEND */
-  .legend { display: flex; flex-direction: column; gap: 0.35rem; }
-  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-dim); }
-  .legend-dot {
-    width: 12px; height: 12px;
+  .pb-btn {
+    width: 36px; height: 36px;
     border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.25);
+    background: var(--stone-mid);
+    color: var(--gold);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .pb-btn:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); }
+  .pb-btn.active { background: var(--blood); border-color: var(--blood-bright); color: #fff; }
+  .pb-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .pb-step {
+    width: 30px; height: 30px;
+    border-radius: 4px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: var(--stone-mid);
+    color: var(--gold);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
     flex-shrink: 0;
   }
+  .pb-step:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+  .pb-step:disabled { opacity: 0.3; cursor: not-allowed; }
 
-  /* RIGHT SIDE */
-  .right-col { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  /* MAP */
-  #map-container {
-    position: relative;
-    background: #0d0b09;
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 4px;
-    overflow: hidden;
+  .scrubber-wrap {
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
   }
-
-  #map-canvas {
-    display: block;
-    width: 100%;
-    image-rendering: pixelated;
-  }
-
-  .map-overlay {
-    position: absolute;
-    top: 0.7rem; left: 0.7rem;
+  .scrubber-labels {
+    display: flex;
+    justify-content: space-between;
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    color: rgba(201,168,76,0.5);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    pointer-events: none;
-  }
-
-  /* CHART */
-  #chart-canvas {
-    display: block;
-    width: 100%;
-    height: 160px;
-  }
-
-  .status-bar {
-    text-align: center;
-    padding: 0.5rem;
-    font-size: 0.8rem;
-    font-style: italic;
+    font-size: 0.6rem;
     color: var(--text-dim);
-    border-top: 1px solid rgba(201,168,76,0.1);
-    min-height: 2rem;
   }
+  #scrubber {
+    width: 100%;
+    height: 4px;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+  #scrubber:disabled { opacity: 0.3; cursor: not-allowed; }
 
-  .phase-label {
-    display: inline-block;
-    padding: 0.1rem 0.6rem;
-    border-radius: 2px;
-    font-style: normal;
+  .pb-mode-label {
     font-family: 'Cinzel', serif;
     font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .pb-mode-label.paused { color: #ff8800; }
+  .pb-mode-label.playing { color: #4aaa4a; }
+  .pb-mode-label.stepping { color: var(--gold-bright); }
+  .pb-mode-label.reviewing { color: #4a90d9; }
+
+  .kbd-hint {
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 0.3rem 0.9rem;
+    border-top: 1px solid rgba(201,168,76,0.07);
+    font-style: italic;
+  }
+  kbd {
+    display: inline-block;
+    background: var(--stone-light);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 0 4px;
+    font-size: 0.6rem;
+    font-family: monospace;
+    color: var(--gold);
   }
 
-  .tooltip {
+  /* reviewing mode overlay on map */
+  .review-banner {
     position: absolute;
-    background: rgba(26,22,18,0.95);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 3px;
-    padding: 0.4rem 0.7rem;
-    font-size: 0.75rem;
+    bottom: 0.5rem; left: 50%; transform: translateX(-50%);
+    background: rgba(74,144,217,0.85);
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    padding: 0.2rem 0.8rem;
+    border-radius: 2px;
     pointer-events: none;
     display: none;
-    z-index: 10;
+    white-space: nowrap;
   }
-
-  select {
-    width: 100%;
-    background: var(--stone);
-    border: 1px solid rgba(201,168,76,0.2);
-    color: var(--text);
-    padding: 0.4rem 0.6rem;
-    border-radius: 3px;
-    font-family: 'Crimson Pro', serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    outline: none;
-  }
-
-  select:focus { border-color: var(--gold); }
-
-  .info-box {
-    background: rgba(139,0,0,0.08);
-    border: 1px solid rgba(139,0,0,0.2);
-    border-radius: 3px;
-    padding: 0.7rem;
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    line-height: 1.5;
-    font-style: italic;
-  }
-
 </style>
 </head>
 <body>
 
 <header>
-  <div><span class="skull">☠</span><span class="skull">☠</span><span class="skull">☠</span></div>
+  <div style="font-size:1.2rem;margin-bottom:0.3rem;opacity:0.6">☠ ☠ ☠</div>
   <h1>Corrupted Blood</h1>
-  <div class="subtitle">Epidemic Simulation Engine</div>
-  <div class="badge">World of Warcraft · Zul'Gurub · September 2005 · SEIRD Model</div>
+  <div class="subtitle">Behavioral Epidemic Simulator</div>
+  <div class="badge">WoW 2005 · SEIRD Model · Behavioral Archetypes · Age Vulnerability</div>
 </header>
 
 <div class="layout">
-  <!-- LEFT PANEL -->
-  <aside>
-    <div class="panel" style="margin-bottom:1.5rem">
-      <div class="panel-header">Simulation Status</div>
-      <div class="panel-body">
-        <div class="day-counter">
-          <div class="day-num" id="day-display">0</div>
-          <div class="day-lbl">Day of Outbreak</div>
-        </div>
-        <div class="stat-grid">
-          <div class="stat-card s">
-            <div class="stat-num" id="s-count">0</div>
-            <div class="stat-label">Susceptible</div>
-          </div>
-          <div class="stat-card e">
-            <div class="stat-num" id="e-count">0</div>
-            <div class="stat-label">Exposed</div>
-          </div>
-          <div class="stat-card i">
-            <div class="stat-num" id="i-count">0</div>
-            <div class="stat-label">Infected</div>
-          </div>
-          <div class="stat-card r">
-            <div class="stat-num" id="r-count">0</div>
-            <div class="stat-label">Recovered</div>
-          </div>
-          <div class="stat-card d" style="grid-column: span 2">
-            <div class="stat-num" id="d-count">0</div>
-            <div class="stat-label">Deceased</div>
-          </div>
-        </div>
-        <div class="status-bar" id="status-bar">Configure and begin the simulation.</div>
+<!-- LEFT -->
+<aside>
+  <div class="panel">
+    <div class="panel-header">Simulation Status</div>
+    <div class="panel-body">
+      <div class="day-counter">
+        <div class="day-num" id="day-display">0</div>
+        <div class="day-lbl">Day of Outbreak</div>
       </div>
-    </div>
-
-    <div class="panel" style="margin-bottom:1.5rem">
-      <div class="panel-header">Pathogen Parameters</div>
-      <div class="panel-body">
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Scenario Preset</span>
-          </div>
-          <select id="preset" onchange="applyPreset()">
-            <option value="corrupted_blood">Corrupted Blood (2005)</option>
-            <option value="mild">Mild Seasonal Flu</option>
-            <option value="covid">COVID-like Pathogen</option>
-            <option value="hemorrhagic">Hemorrhagic Fever</option>
-          </select>
-        </div>
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Transmission Rate (β)</span>
-            <span class="control-value" id="beta-val"></span>
-          </div>
-          <input type="range" id="beta" min="0.1" max="2.0" step="0.05" value="1.4" oninput="updateVal('beta')">
-        </div>
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Incubation Period (days)</span>
-            <span class="control-value" id="sigma-val"></span>
-          </div>
-          <input type="range" id="sigma" min="0.5" max="14" step="0.5" value="1" oninput="updateVal('sigma')">
-        </div>
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Recovery Rate (γ)</span>
-            <span class="control-value" id="gamma-val"></span>
-          </div>
-          <input type="range" id="gamma" min="0.05" max="0.9" step="0.05" value="0.3" oninput="updateVal('gamma')">
-        </div>
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Mortality Rate (μ)</span>
-            <span class="control-value" id="mu-val"></span>
-          </div>
-          <input type="range" id="mu" min="0.0" max="0.5" step="0.01" value="0.15" oninput="updateVal('mu')">
-        </div>
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Population Size</span>
-            <span class="control-value" id="pop-val"></span>
-          </div>
-          <input type="range" id="pop" min="200" max="2000" step="100" value="800" oninput="updateVal('pop')">
-        </div>
-
-        <div class="control-group">
-          <div class="control-label">
-            <span>Sim Speed</span>
-            <span class="control-value" id="speed-val"></span>
-          </div>
-          <input type="range" id="speed" min="1" max="10" step="1" value="4" oninput="updateVal('speed')">
-        </div>
-
-        <button class="btn btn-primary" onclick="startSim()">▶ Begin Outbreak</button>
-        <button class="btn btn-secondary" onclick="resetSim()">↺ Reset</button>
+      <div class="r0-display">
+        <div class="r0-num" id="r0-display">—</div>
+        <div class="r0-lbl">Effective R₀</div>
+        <div class="r0-note" id="r0-note">Average new infections per case</div>
       </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-header">Legend</div>
-      <div class="panel-body">
-        <div class="legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#4aaa4a"></div>Susceptible — healthy, at risk</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#cc8800"></div>Exposed — infected, not yet contagious</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#ff2222"></div>Infected — contagious, symptomatic</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#4a7aaa"></div>Recovered — immune, survived</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#444"></div>Deceased — succumbed to plague</div>
-        </div>
-        <div class="info-box" style="margin-top:1rem">
-          In 2005, WoW players fled infected cities, spreading the plague — mirroring real pandemic behavior studied by epidemiologists.
-        </div>
+      <div class="stat-grid">
+        <div class="stat-card s"><div class="stat-num" id="s-count">0</div><div class="stat-label">Susceptible</div></div>
+        <div class="stat-card e"><div class="stat-num" id="e-count">0</div><div class="stat-label">Exposed</div></div>
+        <div class="stat-card i"><div class="stat-num" id="i-count">0</div><div class="stat-label">Infected</div></div>
+        <div class="stat-card r"><div class="stat-num" id="r-count">0</div><div class="stat-label">Recovered</div></div>
+        <div class="stat-card d" style="grid-column:span 2"><div class="stat-num" id="d-count">0</div><div class="stat-label">Deceased</div></div>
       </div>
+      <div class="status-bar" id="status-bar">Configure and begin the simulation.</div>
     </div>
-  </aside>
+  </div>
 
-  <!-- RIGHT COL -->
-  <div class="right-col">
-    <div id="map-container">
-      <div class="map-overlay">Azeroth — Population Grid</div>
-      <canvas id="map-canvas"></canvas>
-      <div class="tooltip" id="tooltip"></div>
+  <div class="panel">
+    <div class="panel-header">Pathogen &amp; Scenario</div>
+    <div class="panel-body">
+      <div class="control-group">
+        <div class="control-label"><span>Scenario Preset</span></div>
+        <select id="preset" onchange="applyPreset()">
+          <option value="corrupted_blood">Corrupted Blood (2005)</option>
+          <option value="covid">COVID-like Pathogen</option>
+          <option value="flu">Seasonal Flu</option>
+          <option value="hemorrhagic">Hemorrhagic Fever</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Transmission Rate (β)</span><span class="control-value" id="beta-val"></span></div>
+        <input type="range" id="beta" min="0.1" max="2.0" step="0.05" value="1.4" oninput="updateVal('beta')">
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Incubation Period (days)</span><span class="control-value" id="sigma-val"></span></div>
+        <input type="range" id="sigma" min="0.5" max="14" step="0.5" value="1" oninput="updateVal('sigma')">
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Recovery Rate (γ)</span><span class="control-value" id="gamma-val"></span></div>
+        <input type="range" id="gamma" min="0.05" max="0.9" step="0.05" value="0.3" oninput="updateVal('gamma')">
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Base Mortality Rate (μ)</span><span class="control-value" id="mu-val"></span></div>
+        <input type="range" id="mu" min="0.0" max="0.5" step="0.01" value="0.15" oninput="updateVal('mu')">
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Population</span><span class="control-value" id="pop-val"></span></div>
+        <input type="range" id="pop" min="200" max="2000" step="100" value="900" oninput="updateVal('pop')">
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span>Speed</span><span class="control-value" id="speed-val"></span></div>
+        <input type="range" id="speed" min="1" max="10" step="1" value="4" oninput="updateVal('speed')">
+      </div>
+      <button class="btn btn-primary" onclick="startSim()">▶ Begin Outbreak</button>
+      <button class="btn btn-secondary" onclick="togglePause()" id="sidebar-pause" disabled>⏸ Pause / Resume</button>
+      <button class="btn btn-secondary" onclick="resetSim()">↺ Reset Simulation</button>
     </div>
+  </div>
 
-    <div class="panel">
-      <div class="panel-header">Epidemic Curve</div>
-      <div class="panel-body" style="padding:0.5rem 0.5rem 0.3rem">
-        <canvas id="chart-canvas"></canvas>
+  <div class="panel">
+    <div class="panel-header">Behavioral Archetypes</div>
+    <div class="panel-body">
+      <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.7rem;line-height:1.5">
+        Adjust the population distribution of behavioral types. Each reacts differently to the outbreak.
+      </div>
+      <div class="behavior-grid" id="behavior-grid">
+        <!-- built by JS -->
+      </div>
+      <div class="info-box">
+        In 2005, players who intentionally spread the plague mirrored real-world non-compliant behavior studied in pandemic models.
       </div>
     </div>
   </div>
+
+  <div class="panel">
+    <div class="panel-header">Age Group Vulnerability</div>
+    <div class="panel-body">
+      <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.7rem;line-height:1.5">
+        Children and elderly have higher susceptibility and mortality. Adjust population share.
+      </div>
+      <div class="age-grid" id="age-controls"><!-- built by JS --></div>
+    </div>
+  </div>
+</aside>
+
+<!-- RIGHT -->
+<div class="right-col">
+  <div id="map-container">
+    <div class="map-overlay">Azeroth — Agent Grid</div>
+    <canvas id="map-canvas"></canvas>
+    <div class="review-banner" id="review-banner">◀ REVIEWING HISTORY — live simulation paused ▶</div>
+  </div>
+
+  <!-- PLAYBACK CONTROLS -->
+  <div class="panel" style="margin-bottom:0">
+    <div class="panel-header" style="display:flex;justify-content:space-between;align-items:center">
+      <span>Playback Controls</span>
+      <span class="pb-mode-label" id="pb-mode-label">Not started</span>
+    </div>
+    <div class="playback-bar">
+      <button class="pb-btn" id="btn-start" onclick="startSim()" title="Begin simulation (Space)">▶</button>
+      <button class="pb-btn" id="btn-pause" onclick="togglePause()" title="Pause / Resume (Space)" disabled>⏸</button>
+      <button class="pb-step" id="btn-back" onclick="stepBack()" title="Step back one day (←)" disabled>◀</button>
+      <button class="pb-step" id="btn-step" onclick="stepForward()" title="Step forward one day (→)" disabled>▶|</button>
+      <button class="pb-btn" onclick="resetSim()" title="Reset (R)" style="font-size:0.85rem">↺</button>
+      <div class="scrubber-wrap">
+        <input type="range" id="scrubber" min="0" max="0" value="0" disabled
+          oninput="scrubTo(this.value)" title="Drag to review any past day">
+        <div class="scrubber-labels">
+          <span>Day 0</span>
+          <span id="scrubber-mid"></span>
+          <span id="scrubber-max">Day 0</span>
+        </div>
+      </div>
+    </div>
+    <div class="kbd-hint">
+      <kbd>Space</kbd> pause/resume &nbsp;·&nbsp;
+      <kbd>→</kbd> step forward &nbsp;·&nbsp;
+      <kbd>←</kbd> step back &nbsp;·&nbsp;
+      <kbd>R</kbd> reset
+    </div>
+  </div>
+
+  <!-- Live stats row -->
+  <div class="panel">
+    <div class="panel-header">Live Behavioral &amp; Age Breakdown</div>
+    <div class="panel-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+        <!-- Behavior infected counts -->
+        <div>
+          <div class="chart-title">Infected by Behavior Type</div>
+          <div id="behavior-live" class="behavior-grid"></div>
+        </div>
+        <!-- Age breakdown -->
+        <div>
+          <div class="chart-title">Infected / Deceased by Age</div>
+          <div class="age-grid" id="age-live"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="panel" style="margin-bottom:0">
+      <div class="panel-header">Epidemic Curve</div>
+      <div class="panel-body" style="padding:0.5rem 0.4rem 0.3rem">
+        <canvas class="chart" id="epi-chart" height="130"></canvas>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:0">
+      <div class="panel-header">Behavior Spread Contribution</div>
+      <div class="panel-body" style="padding:0.5rem 0.4rem 0.3rem">
+        <canvas class="chart" id="beh-chart" height="130"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:0">
+    <div class="panel-header">Event Log</div>
+    <div class="panel-body" style="padding:0.6rem 0.8rem">
+      <div class="event-log" id="event-log"></div>
+    </div>
+  </div>
+</div>
 </div>
 
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
-const PRESETS = {
-  corrupted_blood: { beta:1.4, sigma:1, gamma:0.3, mu:0.15, pop:800, label:"Corrupted Blood — High transmission, rapid death, low incubation" },
-  mild: { beta:0.35, sigma:3, gamma:0.5, mu:0.005, pop:800, label:"Seasonal Flu — Moderate spread, low mortality" },
-  covid: { beta:0.55, sigma:5, gamma:0.12, mu:0.02, pop:800, label:"COVID-like — Longer incubation, moderate mortality" },
-  hemorrhagic: { beta:0.9, sigma:2, gamma:0.1, mu:0.4, pop:800, label:"Hemorrhagic Fever — High mortality, moderate spread" }
+// ─────────────────────────────────────────────────────────────────────────────
+// BEHAVIOR ARCHETYPES
+// ─────────────────────────────────────────────────────────────────────────────
+const BEHAVIORS = {
+  cautious: {
+    label: 'Cautious',
+    desc: 'Wears protection, avoids crowds',
+    color: '#4a90d9',
+    default: 25,
+    // modifiers
+    susceptMult: 0.3,    // hard to infect
+    transmitMult: 0.2,   // barely spreads
+    mobilityMult: 0.4,   // stays home
+    mortalityMult: 0.6,  // better outcomes
+    fleeChance: 0.05,    // doesn't flee
+  },
+  compliant: {
+    label: 'Compliant',
+    desc: 'Follows guidelines, moderate behavior',
+    color: '#4aaa4a',
+    default: 30,
+    susceptMult: 0.7,
+    transmitMult: 0.5,
+    mobilityMult: 0.7,
+    mortalityMult: 0.85,
+    fleeChance: 0.1,
+  },
+  unaware: {
+    label: 'Unaware',
+    desc: 'Normal behavior, no precautions',
+    color: '#cc8800',
+    default: 25,
+    susceptMult: 1.0,
+    transmitMult: 1.0,
+    mobilityMult: 1.0,
+    mortalityMult: 1.0,
+    fleeChance: 0.2,
+  },
+  defiant: {
+    label: 'Defiant',
+    desc: 'Ignores all warnings, high mobility',
+    color: '#ff6600',
+    default: 12,
+    susceptMult: 1.4,
+    transmitMult: 1.6,
+    mobilityMult: 1.8,
+    mortalityMult: 1.2,
+    fleeChance: 0.4,
+  },
+  griefer: {
+    label: 'Griefer',
+    desc: 'Intentionally spreads disease',
+    color: '#cc1111',
+    default: 8,
+    susceptMult: 1.2,
+    transmitMult: 2.5,  // actively tries to spread
+    mobilityMult: 2.5,  // runs into crowds
+    mortalityMult: 1.1,
+    fleeChance: 0.0,    // seeks contact
+    seeksContact: true,
+  },
 };
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-let agents = [];
-let chartHistory = [];
-let day = 0;
-let running = false;
-let animId = null;
-let lastTick = 0;
-let tickInterval = 300;
+// ─────────────────────────────────────────────────────────────────────────────
+// AGE GROUPS
+// ─────────────────────────────────────────────────────────────────────────────
+const AGE_GROUPS = {
+  child:    { label:'Children',  color:'#70c8e0', default:20, susceptMult:1.5, mortalityMult:0.4,  mobilityMult:0.8 },
+  teen:     { label:'Teenagers', color:'#a0e070', default:20, susceptMult:0.8, mortalityMult:0.2,  mobilityMult:1.3 },
+  adult:    { label:'Adults',    color:'#e0c060', default:45, susceptMult:1.0, mortalityMult:1.0,  mobilityMult:1.0 },
+  elderly:  { label:'Elderly',   color:'#e08080', default:15, susceptMult:1.8, mortalityMult:3.5,  mobilityMult:0.5 },
+};
 
-const CELL = 14;
-const COLS_ZONES = [
-  { name: "Stormwind", color: "#1a2a1a", x: 0.05, y: 0.15, w: 0.25, h: 0.55 },
-  { name: "Ironforge",  color: "#1a1a22", x: 0.35, y: 0.05, w: 0.2,  h: 0.45 },
-  { name: "Orgrimmar",  color: "#221a1a", x: 0.62, y: 0.12, w: 0.3,  h: 0.5  },
-  { name: "Undercity",  color: "#1c1820", x: 0.35, y: 0.55, w: 0.2,  h: 0.35 },
-  { name: "Zul'Gurub", color: "#1f1a10", x: 0.72, y: 0.65, w: 0.23, h: 0.28 },
+// ─────────────────────────────────────────────────────────────────────────────
+// PRESETS
+// ─────────────────────────────────────────────────────────────────────────────
+const PRESETS = {
+  corrupted_blood: { beta:1.4, sigma:1, gamma:0.3, mu:0.15 },
+  covid:           { beta:0.55, sigma:5, gamma:0.12, mu:0.02 },
+  flu:             { beta:0.35, sigma:3, gamma:0.5, mu:0.005 },
+  hemorrhagic:     { beta:0.9, sigma:2, gamma:0.1, mu:0.4 },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ZONES
+// ─────────────────────────────────────────────────────────────────────────────
+const ZONES = [
+  { name:"Stormwind",  x:0.04, y:0.12, w:0.24, h:0.55, color:"#131a13" },
+  { name:"Ironforge",  x:0.33, y:0.04, w:0.2,  h:0.44, color:"#131318" },
+  { name:"Orgrimmar",  x:0.6,  y:0.1,  w:0.28, h:0.48, color:"#1a1313" },
+  { name:"Undercity",  x:0.33, y:0.53, w:0.2,  h:0.35, color:"#141118" },
+  { name:"Zul'Gurub", x:0.71, y:0.63, w:0.25, h:0.3,  color:"#1a1708" },
 ];
 
-let mapW, mapH, cols, rows;
+// ─────────────────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────────────────
+let agents = [];
+let day = 0;
+let animId = null;
+let lastTick = 0;
+let chartHistory = [];
+let behaviorInfectedHistory = {};
+let newInfectionsThisTick = 0;
+let totalNewInfections = 0;
+let r0Estimate = 0;
+let infectionCountWindow = [];
 
-// ─── CANVAS SETUP ─────────────────────────────────────────────────────────────
+let mapW, mapH, cols, rows;
+const CELL = 13;
+
 const mapCanvas = document.getElementById('map-canvas');
 const mctx = mapCanvas.getContext('2d');
-const chartCanvas = document.getElementById('chart-canvas');
-const cctx = chartCanvas.getContext('2d');
 
-function setupMap() {
-  const container = document.getElementById('map-container');
-  mapW = container.clientWidth;
-  mapH = Math.max(320, Math.round(mapW * 0.52));
-  mapCanvas.width = mapW;
-  mapCanvas.height = mapH;
-  cols = Math.floor(mapW / CELL);
-  rows = Math.floor(mapH / CELL);
+// ─────────────────────────────────────────────────────────────────────────────
+// BUILD UI CONTROLS
+// ─────────────────────────────────────────────────────────────────────────────
+function buildBehaviorControls() {
+  const grid = document.getElementById('behavior-grid');
+  grid.innerHTML = '';
+  for (const [key, b] of Object.entries(BEHAVIORS)) {
+    grid.innerHTML += `
+      <div class="brow">
+        <div class="brow-label" style="color:${b.color}">${b.label}</div>
+        <input type="range" id="beh-${key}" min="0" max="60" step="1" value="${b.default}"
+          oninput="updateBehaviorPcts()" style="flex:1;height:3px;accent-color:${b.color}">
+        <div class="brow-pct" id="bpct-${key}">${b.default}%</div>
+      </div>
+      <div style="font-size:0.65rem;color:var(--text-dim);margin-top:-0.3rem;margin-bottom:0.3rem;padding-left:92px">${b.desc}</div>
+    `;
+  }
+  buildAgeLiveGrid();
+  updateBehaviorPcts();
 }
 
-function setupChart() {
-  chartCanvas.width = chartCanvas.offsetWidth * devicePixelRatio;
-  chartCanvas.height = 160 * devicePixelRatio;
-  chartCanvas.style.height = '160px';
-  cctx.scale(devicePixelRatio, devicePixelRatio);
+function updateBehaviorPcts() {
+  // Normalize so they sum to 100
+  let total = 0;
+  const vals = {};
+  for (const key of Object.keys(BEHAVIORS)) {
+    vals[key] = parseInt(document.getElementById(`beh-${key}`).value);
+    total += vals[key];
+  }
+  if (total === 0) return;
+  for (const key of Object.keys(BEHAVIORS)) {
+    const pct = Math.round(vals[key] / total * 100);
+    document.getElementById(`bpct-${key}`).textContent = `${pct}%`;
+  }
 }
 
-// ─── INIT AGENTS ──────────────────────────────────────────────────────────────
+function getBehaviorWeights() {
+  const vals = {};
+  let total = 0;
+  for (const key of Object.keys(BEHAVIORS)) {
+    vals[key] = parseInt(document.getElementById(`beh-${key}`).value) || 0;
+    total += vals[key];
+  }
+  const weights = {};
+  for (const key of Object.keys(BEHAVIORS)) weights[key] = total ? vals[key]/total : 0;
+  return weights;
+}
+
+function buildAgeControls() {
+  const c = document.getElementById('age-controls');
+  c.innerHTML = '';
+  for (const [key, a] of Object.entries(AGE_GROUPS)) {
+    c.innerHTML += `
+      <div class="age-row">
+        <div class="age-label" style="color:${a.color}">${a.label}</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;flex:1">
+          <input type="range" id="age-${key}" min="5" max="60" step="5" value="${a.default}"
+            oninput="updateAgePcts()" style="flex:1;height:3px;accent-color:${a.color}">
+          <span id="agepct-${key}" style="font-family:'Cinzel',serif;font-size:0.65rem;color:var(--gold-bright);width:28px;text-align:right">${a.default}%</span>
+        </div>
+      </div>
+    `;
+  }
+  updateAgePcts();
+}
+
+function updateAgePcts() {
+  let total = 0;
+  const vals = {};
+  for (const key of Object.keys(AGE_GROUPS)) {
+    vals[key] = parseInt(document.getElementById(`age-${key}`).value)||0;
+    total += vals[key];
+  }
+  if (!total) return;
+  for (const key of Object.keys(AGE_GROUPS)) {
+    document.getElementById(`agepct-${key}`).textContent = `${Math.round(vals[key]/total*100)}%`;
+  }
+}
+
+function getAgeWeights() {
+  const vals = {};
+  let total = 0;
+  for (const key of Object.keys(AGE_GROUPS)) {
+    vals[key] = parseInt(document.getElementById(`age-${key}`).value)||0;
+    total += vals[key];
+  }
+  const w = {};
+  for (const key of Object.keys(AGE_GROUPS)) w[key] = total ? vals[key]/total : 0;
+  return w;
+}
+
+function buildAgeLiveGrid() {
+  // Behavior live
+  const bl = document.getElementById('behavior-live');
+  bl.innerHTML = '';
+  for (const [key, b] of Object.entries(BEHAVIORS)) {
+    bl.innerHTML += `
+      <div class="brow">
+        <div class="brow-label" style="color:${b.color};font-size:0.7rem">${b.label}</div>
+        <div class="brow-bar-wrap"><div class="brow-bar" id="blive-${key}" style="background:${b.color};width:0%"></div></div>
+        <div class="brow-pct" id="blive-pct-${key}">0</div>
+      </div>
+    `;
+  }
+  // Age live
+  const al = document.getElementById('age-live');
+  al.innerHTML = `
+    <div class="age-row" style="font-size:0.62rem;color:var(--text-dim)">
+      <div>Group</div><div></div><div style="text-align:right">Inf.</div><div style="text-align:right">Dead</div>
+    </div>
+  `;
+  for (const [key, a] of Object.entries(AGE_GROUPS)) {
+    al.innerHTML += `
+      <div class="age-row" id="agelive-${key}">
+        <div class="age-label" style="color:${a.color}">${a.label}</div>
+        <div class="age-bar-wrap"><div class="age-bar" id="agebar-${key}" style="background:${a.color};width:0%"></div></div>
+        <div class="age-infected" id="ageinf-${key}">0</div>
+        <div class="age-dead" id="agedead-${key}">0</div>
+      </div>
+    `;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT AGENTS
+// ─────────────────────────────────────────────────────────────────────────────
 function initAgents() {
   const pop = parseInt(document.getElementById('pop').value);
+  const bWeights = getBehaviorWeights();
+  const aWeights = getAgeWeights();
   agents = [];
+
+  // Build weighted arrays for random selection
+  const bKeys = Object.keys(BEHAVIORS);
+  const aKeys = Object.keys(AGE_GROUPS);
+
+  function pickWeighted(keys, weights) {
+    let r = Math.random();
+    for (const k of keys) {
+      r -= weights[k];
+      if (r <= 0) return k;
+    }
+    return keys[keys.length-1];
+  }
+
   for (let i = 0; i < pop; i++) {
-    const zone = COLS_ZONES[Math.floor(Math.random() * COLS_ZONES.length)];
+    const zone = ZONES[Math.floor(Math.random() * ZONES.length)];
     const ax = Math.floor((zone.x + Math.random() * zone.w) * cols);
     const ay = Math.floor((zone.y + Math.random() * zone.h) * rows);
+    const behavior = pickWeighted(bKeys, bWeights);
+    const age = pickWeighted(aKeys, aWeights);
+
     agents.push({
-      x: Math.min(ax, cols - 1),
-      y: Math.min(ay, rows - 1),
+      x: Math.max(0, Math.min(cols-1, ax)),
+      y: Math.max(0, Math.min(rows-1, ay)),
       state: 'S',
       timer: 0,
-      zone: zone.name
+      behavior,
+      age,
+      zone: zone.name,
+      infectCount: 0,
     });
   }
-  // Patient zero — from Zul'Gurub
-  const zg = COLS_ZONES[4];
-  const pz = agents[0];
-  pz.x = Math.floor((zg.x + 0.1 + Math.random() * 0.1) * cols);
-  pz.y = Math.floor((zg.y + 0.1 + Math.random() * 0.1) * rows);
-  pz.state = 'I';
-  pz.zone = "Zul'Gurub";
-  pz.timer = 5;
+
+  // Patient Zero — from Zul'Gurub, griefer type
+  const zg = ZONES[4];
+  agents[0].x = Math.floor((zg.x + 0.05 + Math.random()*0.15) * cols);
+  agents[0].y = Math.floor((zg.y + 0.05 + Math.random()*0.15) * rows);
+  agents[0].state = 'I';
+  agents[0].behavior = 'griefer';
+  agents[0].zone = "Zul'Gurub";
+  agents[0].timer = 8;
+
+  chartHistory = [];
+  behaviorInfectedHistory = {};
+  for (const k of bKeys) behaviorInfectedHistory[k] = [];
+  infectionCountWindow = [];
+  totalNewInfections = 0;
 }
 
-// ─── UPDATE ───────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// TICK
+// ─────────────────────────────────────────────────────────────────────────────
 function tick() {
-  const beta = parseFloat(document.getElementById('beta').value);
+  const beta  = parseFloat(document.getElementById('beta').value);
   const sigma = parseFloat(document.getElementById('sigma').value);
   const gamma = parseFloat(document.getElementById('gamma').value);
-  const mu = parseFloat(document.getElementById('mu').value);
+  const mu    = parseFloat(document.getElementById('mu').value);
 
-  // Build grid map for proximity checks
+  newInfectionsThisTick = 0;
+
+  // Build spatial grid
   const grid = {};
   for (const a of agents) {
     if (a.state === 'D') continue;
@@ -614,25 +760,50 @@ function tick() {
   // Movement
   for (const a of agents) {
     if (a.state === 'D') continue;
-    const dx = Math.round((Math.random() - 0.5) * 2);
-    const dy = Math.round((Math.random() - 0.5) * 2);
-    // Fleeing behavior — infected agents occasionally move faster (mirroring players fleeing)
-    const flee = (a.state === 'I' || a.state === 'E') && Math.random() < 0.25;
-    a.x = Math.max(0, Math.min(cols - 1, a.x + dx * (flee ? 3 : 1)));
-    a.y = Math.max(0, Math.min(rows - 1, a.y + dy * (flee ? 3 : 1)));
+    const b = BEHAVIORS[a.behavior];
+    const ag = AGE_GROUPS[a.age];
+    let mob = b.mobilityMult * ag.mobilityMult;
+
+    // Griefers seek crowds — find nearest infected cluster
+    if (b.seeksContact && a.state === 'I') {
+      // Move toward center of map aggressively
+      const dx = (cols/2 - a.x) > 0 ? 1 : -1;
+      const dy = (rows/2 - a.y) > 0 ? 1 : -1;
+      a.x = Math.max(0, Math.min(cols-1, a.x + dx * Math.ceil(mob * 2)));
+      a.y = Math.max(0, Math.min(rows-1, a.y + dy * Math.ceil(mob * 2)));
+      continue;
+    }
+
+    // Flee behavior for infected defiant/unaware
+    const flee = (a.state === 'I' || a.state === 'E') && Math.random() < b.fleeChance;
+    const step = flee ? Math.ceil(mob * 3) : Math.ceil(mob);
+    const dx = Math.round((Math.random()-0.5)*2);
+    const dy = Math.round((Math.random()-0.5)*2);
+    a.x = Math.max(0, Math.min(cols-1, a.x + dx * step));
+    a.y = Math.max(0, Math.min(rows-1, a.y + dy * step));
   }
 
   // Transmission
   for (const a of agents) {
     if (a.state !== 'I') continue;
-    for (let dx = -2; dx <= 2; dx++) {
-      for (let dy = -2; dy <= 2; dy++) {
-        const k = `${a.x + dx},${a.y + dy}`;
+    const bSrc = BEHAVIORS[a.behavior];
+    const radius = bSrc.seeksContact ? 3 : 2;
+
+    for (let dx = -radius; dx <= radius; dx++) {
+      for (let dy = -radius; dy <= radius; dy++) {
+        const k = `${a.x+dx},${a.y+dy}`;
         if (!grid[k]) continue;
         for (const b of grid[k]) {
-          if (b.state === 'S' && Math.random() < beta * 0.12) {
+          if (b.state !== 'S') continue;
+          const bTgt = BEHAVIORS[b.behavior];
+          const agTgt = AGE_GROUPS[b.age];
+          const prob = beta * 0.1 * bSrc.transmitMult * bTgt.susceptMult * agTgt.susceptMult;
+          if (Math.random() < prob) {
             b.state = 'E';
-            b.timer = Math.round(sigma + Math.random() * 2);
+            b.timer = Math.max(1, Math.round(sigma + (Math.random()-0.5)*2));
+            a.infectCount++;
+            newInfectionsThisTick++;
+            totalNewInfections++;
           }
         }
       }
@@ -643,30 +814,51 @@ function tick() {
   for (const a of agents) {
     if (a.state === 'E') {
       a.timer--;
-      if (a.timer <= 0) { a.state = 'I'; a.timer = Math.round(1/gamma + Math.random() * 3); }
+      if (a.timer <= 0) { a.state='I'; a.timer=Math.max(1, Math.round(1/gamma + Math.random()*3)); }
     } else if (a.state === 'I') {
       a.timer--;
       if (a.timer <= 0) {
-        a.state = Math.random() < mu ? 'D' : 'R';
-        a.timer = 0;
+        const bMod = BEHAVIORS[a.behavior].mortalityMult;
+        const aMod = AGE_GROUPS[a.age].mortalityMult;
+        a.state = Math.random() < Math.min(0.98, mu * bMod * aMod) ? 'D' : 'R';
       }
     }
   }
 
   day++;
+
+  // R0 window estimate (rolling 5-day)
+  infectionCountWindow.push(newInfectionsThisTick);
+  if (infectionCountWindow.length > 5) infectionCountWindow.shift();
+  const activeInfected = agents.filter(a=>a.state==='I').length;
+  if (activeInfected > 0) {
+    const avgNew = infectionCountWindow.reduce((a,b)=>a+b,0) / infectionCountWindow.length;
+    r0Estimate = parseFloat((avgNew / activeInfected * (1/parseFloat(document.getElementById('gamma').value))).toFixed(2));
+  }
+
   recordHistory();
   updateStats();
+  updateLiveBreakdown();
   checkPhase();
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// RECORD & STATS
+// ─────────────────────────────────────────────────────────────────────────────
 function recordHistory() {
-  const counts = { S:0, E:0, I:0, R:0, D:0 };
-  for (const a of agents) counts[a.state]++;
+  const counts = {S:0,E:0,I:0,R:0,D:0};
+  const bCounts = {};
+  for (const k of Object.keys(BEHAVIORS)) bCounts[k] = 0;
+  for (const a of agents) {
+    counts[a.state]++;
+    if (a.state === 'I') bCounts[a.behavior]++;
+  }
   chartHistory.push({...counts, day});
+  for (const k of Object.keys(BEHAVIORS)) behaviorInfectedHistory[k].push(bCounts[k]);
 }
 
 function updateStats() {
-  const counts = { S:0, E:0, I:0, R:0, D:0 };
+  const counts = {S:0,E:0,I:0,R:0,D:0};
   for (const a of agents) counts[a.state]++;
   document.getElementById('day-display').textContent = day;
   document.getElementById('s-count').textContent = counts.S;
@@ -674,203 +866,660 @@ function updateStats() {
   document.getElementById('i-count').textContent = counts.I;
   document.getElementById('r-count').textContent = counts.R;
   document.getElementById('d-count').textContent = counts.D;
+
+  const r0el = document.getElementById('r0-display');
+  r0el.textContent = r0Estimate > 0 ? r0Estimate : '—';
+  r0el.style.color = r0Estimate > 2 ? '#ff2222' : r0Estimate > 1 ? '#ff8800' : '#4aaa4a';
+  document.getElementById('r0-note').textContent =
+    r0Estimate > 2 ? 'Epidemic growing rapidly' :
+    r0Estimate > 1 ? 'Epidemic growing' :
+    r0Estimate > 0 ? 'Epidemic slowing' : 'Awaiting data';
 }
 
-function checkPhase() {
-  const counts = { S:0, E:0, I:0, R:0, D:0 };
-  for (const a of agents) counts[a.state]++;
-  const sb = document.getElementById('status-bar');
+function updateLiveBreakdown() {
   const pop = agents.length;
-  const dead = counts.D;
-  const pct = Math.round(dead/pop*100);
-
-  if (counts.I === 0 && counts.E === 0) {
-    sb.innerHTML = `Outbreak concluded. <strong>${dead} fallen</strong> (${pct}% mortality). <em>${counts.R} survivors.</em>`;
-    running = false;
-    return;
-  }
-  if (day === 1) sb.innerHTML = `<span style="color:#cc1111">⚠ Patient Zero detected in Zul'Gurub. Plague spreading.</span>`;
-  else if (counts.I > pop * 0.3) sb.innerHTML = `<span style="color:#ff4444">⚠ EPIDEMIC PEAK — ${counts.I} infected simultaneously. Cities overwhelmed.</span>`;
-  else if (counts.D > pop * 0.1) sb.innerHTML = `Casualties mounting — ${dead} dead (${pct}%). ${counts.I} actively infected.`;
-  else sb.innerHTML = `Day ${day} — ${counts.I} infected · ${counts.E} exposed · ${dead} deceased`;
-}
-
-// ─── RENDER MAP ───────────────────────────────────────────────────────────────
-function drawMap() {
-  mctx.fillStyle = '#0d0b09';
-  mctx.fillRect(0, 0, mapW, mapH);
-
-  // Draw zones
-  for (const z of COLS_ZONES) {
-    mctx.fillStyle = z.color;
-    mctx.fillRect(z.x * mapW, z.y * mapH, z.w * mapW, z.h * mapH);
-    mctx.strokeStyle = 'rgba(201,168,76,0.12)';
-    mctx.lineWidth = 1;
-    mctx.strokeRect(z.x * mapW, z.y * mapH, z.w * mapW, z.h * mapH);
-    mctx.fillStyle = 'rgba(201,168,76,0.35)';
-    mctx.font = '10px Cinzel, serif';
-    mctx.fillText(z.name, z.x * mapW + 6, z.y * mapH + 14);
-  }
-
-  const stateColor = { S: '#2d7a2d', E: '#996600', I: '#cc1111', R: '#336699', D: '#333333' };
-  const stateGlow  = { S: null, E: null, I: 'rgba(204,17,17,0.6)', R: null, D: null };
+  // Behavior live bars
+  const bTotals = {};
+  for (const k of Object.keys(BEHAVIORS)) bTotals[k] = 0;
+  const aCounts = {};
+  for (const k of Object.keys(AGE_GROUPS)) aCounts[k] = {total:0, infected:0, dead:0};
 
   for (const a of agents) {
-    const px = a.x * CELL + 2;
-    const py = a.y * CELL + 2;
-    const r = 4;
-    if (stateGlow[a.state]) {
-      mctx.shadowColor = stateGlow[a.state];
-      mctx.shadowBlur = 6;
+    if (a.state==='I') bTotals[a.behavior]++;
+    aCounts[a.age].total++;
+    if (a.state==='I') aCounts[a.age].infected++;
+    if (a.state==='D') aCounts[a.age].dead++;
+  }
+
+  const maxBI = Math.max(1, ...Object.values(bTotals));
+  for (const [k, v] of Object.entries(bTotals)) {
+    const bar = document.getElementById(`blive-${k}`);
+    const pct = document.getElementById(`blive-pct-${k}`);
+    if (bar) { bar.style.width = `${(v/maxBI*100).toFixed(0)}%`; pct.textContent = v; }
+  }
+
+  for (const [k, v] of Object.entries(aCounts)) {
+    const bar = document.getElementById(`agebar-${k}`);
+    const inf = document.getElementById(`ageinf-${k}`);
+    const dead = document.getElementById(`agedead-${k}`);
+    if (!bar) continue;
+    bar.style.width = `${(v.infected / Math.max(1, v.total) * 100).toFixed(0)}%`;
+    inf.textContent = v.infected;
+    dead.textContent = v.dead;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PHASE / EVENT LOG
+// ─────────────────────────────────────────────────────────────────────────────
+const loggedEvents = new Set();
+
+function checkPhase() {
+  const counts = {S:0,E:0,I:0,R:0,D:0};
+  for (const a of agents) counts[a.state]++;
+  const pop = agents.length;
+
+  const sb = document.getElementById('status-bar');
+
+  if (counts.I === 0 && counts.E === 0 && day > 1) {
+    sb.innerHTML = `Outbreak concluded — <strong>${counts.D} deceased</strong> (${Math.round(counts.D/pop*100)}% mortality). ${counts.R} survived.`;
+    logEvent(`Day ${day}: Outbreak ended. ${counts.D} dead, ${counts.R} recovered.`, 'good');
+    simMode = 'paused';
+    updateModeUI();
+    return;
+  }
+
+  sb.innerHTML = `Day ${day} — <span style="color:#ff2222">${counts.I} infected</span> · ${counts.E} exposed · ${counts.D} deceased · R₀ ${r0Estimate}`;
+
+  // Milestone logs
+  if (day === 1 && !loggedEvents.has('start')) {
+    logEvent('Day 1: Patient Zero emerges from Zul\'Gurub. Plague detected.', 'danger');
+    loggedEvents.add('start');
+  }
+  if (counts.I > pop*0.1 && !loggedEvents.has('10pct')) {
+    logEvent(`Day ${day}: 10% of population now infected. Authorities issue warnings.`, 'warn');
+    loggedEvents.add('10pct');
+  }
+  if (counts.I > pop*0.25 && !loggedEvents.has('25pct')) {
+    logEvent(`Day ${day}: EPIDEMIC PEAK — ${counts.I} simultaneously infected. Cities overwhelmed.`, 'danger');
+    loggedEvents.add('25pct');
+  }
+  if (counts.D > pop*0.05 && !loggedEvents.has('deaths5')) {
+    logEvent(`Day ${day}: Casualty threshold crossed — ${counts.D} dead.`, 'danger');
+    loggedEvents.add('deaths5');
+  }
+  if (counts.R > counts.I && !loggedEvents.has('turning')) {
+    logEvent(`Day ${day}: Recoveries now exceed active infections. Curve may be turning.`, 'good');
+    loggedEvents.add('turning');
+  }
+  // Griefer specific
+  const griefers = agents.filter(a=>a.behavior==='griefer'&&a.state==='I');
+  if (griefers.length > 0 && !loggedEvents.has('grieferActive')) {
+    logEvent(`Day ${day}: Griefers are actively spreading the plague through populated areas.`, 'danger');
+    loggedEvents.add('grieferActive');
+  }
+  // Elderly deaths
+  const elderlyDead = agents.filter(a=>a.age==='elderly'&&a.state==='D').length;
+  if (elderlyDead > 5 && !loggedEvents.has('elderlyDead')) {
+    logEvent(`Day ${day}: Elderly casualties rising — ${elderlyDead} elderly deaths recorded.`, 'warn');
+    loggedEvents.add('elderlyDead');
+  }
+}
+
+function logEvent(msg, type='info') {
+  const log = document.getElementById('event-log');
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  entry.textContent = msg;
+  log.insertBefore(entry, log.firstChild);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER MAP
+// ─────────────────────────────────────────────────────────────────────────────
+const STATE_COLORS = {
+  S: { base:'#2d7a2d', glow: null },
+  E: { base:'#996600', glow: null },
+  I: { base:'#cc1111', glow: 'rgba(204,17,17,0.7)' },
+  R: { base:'#336699', glow: null },
+  D: { base:'#2a2a2a', glow: null },
+};
+
+// Age modifies dot size slightly
+const AGE_SIZE = { child:3, teen:3.5, adult:4, elderly:4.5 };
+
+function drawMap() {
+  mctx.fillStyle='#0d0b09';
+  mctx.fillRect(0,0,mapW,mapH);
+
+  for (const z of ZONES) {
+    mctx.fillStyle = z.color;
+    mctx.fillRect(z.x*mapW, z.y*mapH, z.w*mapW, z.h*mapH);
+    mctx.strokeStyle = 'rgba(201,168,76,0.1)';
+    mctx.lineWidth = 1;
+    mctx.strokeRect(z.x*mapW, z.y*mapH, z.w*mapW, z.h*mapH);
+    mctx.fillStyle='rgba(201,168,76,0.3)';
+    mctx.font='10px Cinzel,serif';
+    mctx.fillText(z.name, z.x*mapW+5, z.y*mapH+13);
+  }
+
+  for (const a of agents) {
+    const sc = STATE_COLORS[a.state];
+    const px = a.x * CELL + CELL/2;
+    const py = a.y * CELL + CELL/2;
+    const r = AGE_SIZE[a.age] || 4;
+
+    if (sc.glow) {
+      mctx.shadowColor = sc.glow;
+      mctx.shadowBlur = 8;
     }
-    mctx.fillStyle = stateColor[a.state];
+
+    // Behavior shape: griefers have an X overlay
+    mctx.fillStyle = sc.base;
     mctx.beginPath();
-    mctx.arc(px, py, r, 0, Math.PI * 2);
+    mctx.arc(px, py, r, 0, Math.PI*2);
     mctx.fill();
     mctx.shadowBlur = 0;
+
+    // Draw behavior indicator for griefer/cautious
+    if (a.behavior === 'griefer' && a.state !== 'D') {
+      mctx.strokeStyle = '#ff6600';
+      mctx.lineWidth = 1;
+      mctx.beginPath();
+      mctx.moveTo(px-r, py-r); mctx.lineTo(px+r, py+r);
+      mctx.moveTo(px+r, py-r); mctx.lineTo(px-r, py+r);
+      mctx.stroke();
+    }
+    if (a.behavior === 'cautious' && a.state !== 'D') {
+      mctx.strokeStyle = '#4a90d9';
+      mctx.lineWidth = 1;
+      mctx.beginPath();
+      mctx.arc(px, py, r+2, 0, Math.PI*2);
+      mctx.stroke();
+    }
   }
 
   // Vignette
-  const vg = mctx.createRadialGradient(mapW/2, mapH/2, mapH*0.3, mapW/2, mapH/2, mapH*0.8);
-  vg.addColorStop(0, 'transparent');
-  vg.addColorStop(1, 'rgba(0,0,0,0.5)');
-  mctx.fillStyle = vg;
-  mctx.fillRect(0, 0, mapW, mapH);
+  const vg = mctx.createRadialGradient(mapW/2,mapH/2,mapH*0.3,mapW/2,mapH/2,mapH*0.85);
+  vg.addColorStop(0,'transparent');
+  vg.addColorStop(1,'rgba(0,0,0,0.55)');
+  mctx.fillStyle=vg;
+  mctx.fillRect(0,0,mapW,mapH);
 }
 
-// ─── RENDER CHART ─────────────────────────────────────────────────────────────
-function drawChart() {
-  const W = chartCanvas.offsetWidth;
-  const H = 160;
-  cctx.clearRect(0, 0, W * devicePixelRatio, H * devicePixelRatio);
+// ─────────────────────────────────────────────────────────────────────────────
+// CHARTS
+// ─────────────────────────────────────────────────────────────────────────────
+function drawEpiChart() { drawEpiChartData(chartHistory); }
+function drawBehChart() {
+  drawBehChartData(behaviorInfectedHistory);
+}
 
-  if (chartHistory.length < 2) return;
+function drawEpiChartData(history) {
+  const canvas = document.getElementById('epi-chart');
+  const W = canvas.offsetWidth, H = 130;
+  if (!canvas._dpr) {
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.height = H+'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    canvas._dpr = true;
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, W, H);
+  if (history.length < 2) return;
 
-  const pop = agents.length;
-  const maxDay = chartHistory.length;
+  const pop = agents.length || 1;
   const lines = [
-    { key: 'S', color: '#4aaa4a' },
-    { key: 'E', color: '#cc8800' },
-    { key: 'I', color: '#ff2222' },
-    { key: 'R', color: '#4a7aaa' },
-    { key: 'D', color: '#666666' },
+    {key:'S',color:'#4aaa4a'},{key:'E',color:'#cc8800'},
+    {key:'I',color:'#ff2222',bold:true},{key:'R',color:'#4a7aaa'},{key:'D',color:'#666'},
   ];
 
-  // Grid lines
-  cctx.strokeStyle = 'rgba(201,168,76,0.07)';
-  cctx.lineWidth = 1;
-  for (let i = 0; i <= 4; i++) {
-    const y = (H - 20) * (1 - i/4) + 5;
-    cctx.beginPath();
-    cctx.moveTo(30, y);
-    cctx.lineTo(W - 10, y);
-    cctx.stroke();
-    cctx.fillStyle = 'rgba(201,168,76,0.3)';
-    cctx.font = '9px Crimson Pro, serif';
-    cctx.fillText(Math.round(pop * i/4), 2, y + 3);
+  ctx.strokeStyle='rgba(201,168,76,0.06)';ctx.lineWidth=1;
+  for (let i=0;i<=4;i++){
+    const y=(H-18)*(1-i/4)+5;
+    ctx.beginPath();ctx.moveTo(28,y);ctx.lineTo(W-5,y);ctx.stroke();
+    ctx.fillStyle='rgba(201,168,76,0.3)';ctx.font='8px Crimson Pro,serif';
+    ctx.fillText(Math.round(pop*i/4),2,y+3);
   }
 
-  for (const line of lines) {
-    cctx.beginPath();
-    cctx.strokeStyle = line.color;
-    cctx.lineWidth = line.key === 'I' ? 2.5 : 1.5;
-    cctx.shadowColor = line.key === 'I' ? line.color : 'transparent';
-    cctx.shadowBlur = line.key === 'I' ? 4 : 0;
-    for (let i = 0; i < chartHistory.length; i++) {
-      const x = 30 + (i / Math.max(maxDay - 1, 1)) * (W - 40);
-      const y = 5 + (H - 20) * (1 - chartHistory[i][line.key] / pop);
-      i === 0 ? cctx.moveTo(x, y) : cctx.lineTo(x, y);
+  const n = history.length;
+  for (const ln of lines) {
+    ctx.beginPath();
+    ctx.strokeStyle=ln.color;
+    ctx.lineWidth=ln.bold?2.5:1.5;
+    ctx.shadowColor=ln.bold?ln.color:'transparent';
+    ctx.shadowBlur=ln.bold?5:0;
+    for (let i=0;i<n;i++){
+      const x=28+(i/(Math.max(n-1,1)))*(W-33);
+      const y=5+(H-18)*(1-history[i][ln.key]/pop);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
     }
-    cctx.stroke();
-    cctx.shadowBlur = 0;
+    ctx.stroke();ctx.shadowBlur=0;
+  }
+
+  // Review cursor line
+  if (simMode === 'reviewing' && reviewDay !== null) {
+    const totalDays = snapshots.length > 0 ? snapshots[snapshots.length-1].day : day;
+    const rx = 28 + (reviewDay / Math.max(totalDays, 1)) * (W - 33);
+    ctx.strokeStyle = 'rgba(74,144,217,0.8)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(rx, 5); ctx.lineTo(rx, H-18); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(74,144,217,0.9)';
+    ctx.font = '8px Cinzel,serif';
+    ctx.fillText(`Day ${reviewDay}`, Math.max(30, rx-18), 14);
+  }
+
+  const labels=[['S','#4aaa4a'],['E','#cc8800'],['I','#ff2222'],['R','#4a7aaa'],['D','#666']];
+  let lx=32;
+  for(const[l,c] of labels){ctx.fillStyle=c;ctx.font='8px Cinzel,serif';ctx.fillText(l,lx,H-3);lx+=16;}
+}
+
+function drawBehChartData(bHistory) {
+  const canvas = document.getElementById('beh-chart');
+  const W = canvas.offsetWidth, H = 130;
+  if (!canvas._dpr) {
+    canvas.width = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    canvas.style.height = H+'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    canvas._dpr = true;
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, W, H);
+  if (!chartHistory.length) return;
+
+  const bKeys = Object.keys(BEHAVIORS);
+  const maxVal = Math.max(1, ...bKeys.flatMap(k => bHistory[k]||[]));
+  const n = (bHistory[bKeys[0]]||[]).length;
+
+  ctx.strokeStyle='rgba(201,168,76,0.06)';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=(H-18)*(1-i/4)+5;
+    ctx.beginPath();ctx.moveTo(28,y);ctx.lineTo(W-5,y);ctx.stroke();
+    ctx.fillStyle='rgba(201,168,76,0.25)';ctx.font='8px Crimson Pro,serif';
+    ctx.fillText(Math.round(maxVal*i/4),2,y+3);
+  }
+
+  for (const k of bKeys) {
+    const hist = bHistory[k]||[];
+    if (!hist.length) continue;
+    ctx.beginPath();
+    ctx.strokeStyle=BEHAVIORS[k].color;
+    ctx.lineWidth=1.8;
+    for (let i=0;i<hist.length;i++){
+      const x=28+(i/(Math.max(hist.length-1,1)))*(W-33);
+      const y=5+(H-18)*(1-hist[i]/maxVal);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+
+  let lx=32;
+  for(const k of bKeys){
+    ctx.fillStyle=BEHAVIORS[k].color;ctx.font='7px Cinzel,serif';
+    ctx.fillText(BEHAVIORS[k].label.slice(0,4),lx,H-3);lx+=36;
   }
 }
 
-// ─── ANIMATION LOOP ───────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// PLAYBACK STATE
+// ─────────────────────────────────────────────────────────────────────────────
+// Modes: 'idle' | 'playing' | 'paused' | 'reviewing'
+let simMode = 'idle';
+// Snapshot history for scrubbing: array of {agents snapshot, counts, day}
+let snapshots = [];
+let reviewDay = null; // which snapshot day we're displaying when reviewing
+
+function saveSnapshot() {
+  // Save a lightweight snapshot every tick for scrubbing
+  // We store the per-agent state (not full objects, just what we need to replay visually)
+  snapshots.push({
+    day,
+    agentSnap: agents.map(a => ({ x:a.x, y:a.y, state:a.state, behavior:a.behavior, age:a.age })),
+    counts: { S:0,E:0,I:0,R:0,D:0 },
+  });
+  const snap = snapshots[snapshots.length-1];
+  for (const a of agents) snap.counts[a.state]++;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ANIMATION LOOP
+// ─────────────────────────────────────────────────────────────────────────────
 function loop(ts) {
-  if (!running) return;
+  if (simMode !== 'playing') return;
   const speed = parseInt(document.getElementById('speed').value);
-  tickInterval = Math.round(600 / speed);
-  if (ts - lastTick > tickInterval) {
+  const interval = Math.round(600 / speed);
+  if (ts - lastTick > interval) {
     tick();
+    saveSnapshot();
+    updateScrubber();
     lastTick = ts;
   }
   drawMap();
-  drawChart();
+  drawEpiChart();
+  drawBehChart();
   animId = requestAnimationFrame(loop);
 }
 
-// ─── UI HELPERS ───────────────────────────────────────────────────────────────
-const FORMAT = { beta: v => v.toFixed(2), sigma: v => `${v}d`, gamma: v => v.toFixed(2), mu: v => `${(v*100).toFixed(0)}%`, pop: v => v.toLocaleString(), speed: v => `${v}x` };
+// ─────────────────────────────────────────────────────────────────────────────
+// SCRUBBER
+// ─────────────────────────────────────────────────────────────────────────────
+function updateScrubber() {
+  const scrubber = document.getElementById('scrubber');
+  const maxDay = snapshots.length > 0 ? snapshots[snapshots.length-1].day : 0;
+  scrubber.max = maxDay;
+  if (simMode !== 'reviewing') scrubber.value = maxDay;
+  document.getElementById('scrubber-max').textContent = `Day ${maxDay}`;
+  document.getElementById('scrubber-mid').textContent = maxDay > 0 ? `Day ${Math.round(maxDay/2)}` : '';
+}
 
+function scrubTo(val) {
+  val = parseInt(val);
+  if (snapshots.length === 0) return;
+
+  // Pause live sim when scrubbing
+  if (simMode === 'playing') {
+    simMode = 'paused';
+    cancelAnimationFrame(animId);
+  }
+
+  // Find snapshot for this day
+  const snap = snapshots.find(s => s.day === val) || snapshots[snapshots.length-1];
+  if (!snap) return;
+
+  simMode = 'reviewing';
+  reviewDay = snap.day;
+  updateModeUI();
+
+  // Render the snapshot visually
+  renderSnapshot(snap);
+
+  // Update stats panel from snapshot
+  document.getElementById('day-display').textContent = snap.day;
+  document.getElementById('s-count').textContent = snap.counts.S;
+  document.getElementById('e-count').textContent = snap.counts.E;
+  document.getElementById('i-count').textContent = snap.counts.I;
+  document.getElementById('r-count').textContent = snap.counts.R;
+  document.getElementById('d-count').textContent = snap.counts.D;
+  document.getElementById('status-bar').innerHTML =
+    `<span style="color:#4a90d9">◀ Reviewing Day ${snap.day}</span> — ${snap.counts.I} infected · ${snap.counts.D} deceased`;
+
+  // Redraw charts with history up to this snapshot
+  drawEpiChartUpTo(snap.day);
+  drawBehChartUpTo(snap.day);
+}
+
+function renderSnapshot(snap) {
+  // Draw map from snapshot agent data
+  mctx.fillStyle='#0d0b09';
+  mctx.fillRect(0,0,mapW,mapH);
+  for (const z of ZONES) {
+    mctx.fillStyle=z.color;
+    mctx.fillRect(z.x*mapW,z.y*mapH,z.w*mapW,z.h*mapH);
+    mctx.strokeStyle='rgba(201,168,76,0.1)';mctx.lineWidth=1;
+    mctx.strokeRect(z.x*mapW,z.y*mapH,z.w*mapW,z.h*mapH);
+    mctx.fillStyle='rgba(201,168,76,0.3)';mctx.font='10px Cinzel,serif';
+    mctx.fillText(z.name,z.x*mapW+5,z.y*mapH+13);
+  }
+  const STATE_COLORS = { S:'#2d7a2d', E:'#996600', I:'#cc1111', R:'#336699', D:'#2a2a2a' };
+  const AGE_SIZE = { child:3, teen:3.5, adult:4, elderly:4.5 };
+  for (const a of snap.agentSnap) {
+    const px = a.x*CELL+CELL/2, py = a.y*CELL+CELL/2;
+    const r = AGE_SIZE[a.age]||4;
+    if (a.state==='I'){mctx.shadowColor='rgba(204,17,17,0.7)';mctx.shadowBlur=8;}
+    mctx.fillStyle=STATE_COLORS[a.state];
+    mctx.beginPath();mctx.arc(px,py,r,0,Math.PI*2);mctx.fill();
+    mctx.shadowBlur=0;
+    if(a.behavior==='griefer'&&a.state!=='D'){
+      mctx.strokeStyle='#ff6600';mctx.lineWidth=1;
+      mctx.beginPath();mctx.moveTo(px-r,py-r);mctx.lineTo(px+r,py+r);
+      mctx.moveTo(px+r,py-r);mctx.lineTo(px-r,py+r);mctx.stroke();
+    }
+    if(a.behavior==='cautious'&&a.state!=='D'){
+      mctx.strokeStyle='#4a90d9';mctx.lineWidth=1;
+      mctx.beginPath();mctx.arc(px,py,r+2,0,Math.PI*2);mctx.stroke();
+    }
+  }
+  const vg=mctx.createRadialGradient(mapW/2,mapH/2,mapH*0.3,mapW/2,mapH/2,mapH*0.85);
+  vg.addColorStop(0,'transparent');vg.addColorStop(1,'rgba(0,0,0,0.55)');
+  mctx.fillStyle=vg;mctx.fillRect(0,0,mapW,mapH);
+}
+
+function drawEpiChartUpTo(maxDay) {
+  const subset = chartHistory.filter(h => h.day <= maxDay);
+  drawEpiChartData(subset);
+}
+function drawBehChartUpTo(maxDay) {
+  const idx = snapshots.findIndex(s => s.day === maxDay);
+  const cutoff = idx >= 0 ? idx+1 : behaviorInfectedHistory[Object.keys(BEHAVIORS)[0]].length;
+  const subHist = {};
+  for (const k of Object.keys(BEHAVIORS)) subHist[k] = (behaviorInfectedHistory[k]||[]).slice(0, cutoff);
+  drawBehChartData(subHist);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STEP CONTROLS
+// ─────────────────────────────────────────────────────────────────────────────
+function stepForward() {
+  if (simMode === 'idle') return;
+
+  if (simMode === 'reviewing') {
+    // Check if we can advance to next snapshot or need to simulate
+    const nextSnap = snapshots.find(s => s.day === reviewDay + 1);
+    if (nextSnap) {
+      reviewDay = nextSnap.day;
+      document.getElementById('scrubber').value = reviewDay;
+      scrubTo(reviewDay);
+      return;
+    }
+    // No snapshot — resume from live state to tick one more
+    simMode = 'paused';
+    reviewDay = null;
+    updateModeUI();
+  }
+
+  // Tick one day
+  if (simMode === 'paused' || simMode === 'playing') {
+    const wasPlaying = simMode === 'playing';
+    if (wasPlaying) { cancelAnimationFrame(animId); simMode = 'paused'; }
+    tick();
+    saveSnapshot();
+    updateScrubber();
+    drawMap();
+    drawEpiChart();
+    drawBehChart();
+    updateModeUI();
+  }
+}
+
+function stepBack() {
+  if (snapshots.length === 0) return;
+  const currentDay = (simMode === 'reviewing' && reviewDay !== null) ? reviewDay : day;
+  const targetDay = Math.max(1, currentDay - 1);
+  document.getElementById('scrubber').value = targetDay;
+  scrubTo(targetDay);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAUSE / RESUME / MODE UI
+// ─────────────────────────────────────────────────────────────────────────────
+function togglePause() {
+  if (simMode === 'idle') return;
+
+  if (simMode === 'reviewing') {
+    // Exit review mode and resume from live
+    simMode = 'paused';
+    reviewDay = null;
+    // Restore live display
+    document.getElementById('day-display').textContent = day;
+    updateStats();
+    drawMap();
+    drawEpiChart();
+    drawBehChart();
+    document.getElementById('scrubber').value = day;
+    updateModeUI();
+    return;
+  }
+
+  if (simMode === 'playing') {
+    simMode = 'paused';
+    cancelAnimationFrame(animId);
+  } else if (simMode === 'paused') {
+    simMode = 'playing';
+    animId = requestAnimationFrame(loop);
+  }
+  updateModeUI();
+}
+
+function updateModeUI() {
+  const modeLabel = document.getElementById('pb-mode-label');
+  const pauseBtn = document.getElementById('btn-pause');
+  const startBtn = document.getElementById('btn-start');
+  const stepBtn = document.getElementById('btn-step');
+  const backBtn = document.getElementById('btn-back');
+  const scrubber = document.getElementById('scrubber');
+  const sidebarPause = document.getElementById('sidebar-pause');
+  const reviewBanner = document.getElementById('review-banner');
+
+  const hasStarted = simMode !== 'idle';
+  scrubber.disabled = !hasStarted || snapshots.length === 0;
+  stepBtn.disabled = !hasStarted;
+  backBtn.disabled = !hasStarted || snapshots.length === 0;
+  pauseBtn.disabled = !hasStarted;
+  sidebarPause.disabled = !hasStarted;
+
+  reviewBanner.style.display = simMode === 'reviewing' ? 'block' : 'none';
+
+  if (simMode === 'idle') {
+    modeLabel.className='pb-mode-label'; modeLabel.textContent='Not started';
+    startBtn.style.display='flex'; pauseBtn.innerHTML='⏸';
+    pauseBtn.classList.remove('active');
+  } else if (simMode === 'playing') {
+    modeLabel.className='pb-mode-label playing'; modeLabel.textContent='● Live';
+    startBtn.style.display='none';
+    pauseBtn.innerHTML='⏸'; pauseBtn.classList.remove('active');
+    sidebarPause.textContent='⏸ Pause';
+  } else if (simMode === 'paused') {
+    modeLabel.className='pb-mode-label paused'; modeLabel.textContent='⏸ Paused';
+    startBtn.style.display='none';
+    pauseBtn.innerHTML='▶'; pauseBtn.classList.add('active');
+    sidebarPause.textContent='▶ Resume';
+  } else if (simMode === 'reviewing') {
+    modeLabel.className='pb-mode-label reviewing'; modeLabel.textContent=`◀ Day ${reviewDay}`;
+    startBtn.style.display='none';
+    pauseBtn.innerHTML='⏎'; pauseBtn.classList.add('active');
+    pauseBtn.title='Return to live (Space)';
+    sidebarPause.textContent='⏎ Return to Live';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// KEYBOARD SHORTCUTS
+// ─────────────────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+  if (e.code === 'Space') { e.preventDefault(); simMode==='idle' ? startSim() : togglePause(); }
+  if (e.code === 'ArrowRight') { e.preventDefault(); stepForward(); }
+  if (e.code === 'ArrowLeft')  { e.preventDefault(); stepBack(); }
+  if (e.code === 'KeyR' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); resetSim(); }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONTROLS
+// ─────────────────────────────────────────────────────────────────────────────
+const FORMAT = {
+  beta: v=>`${parseFloat(v).toFixed(2)}`,
+  sigma: v=>`${v}d`,
+  gamma: v=>`${parseFloat(v).toFixed(2)}`,
+  mu: v=>`${Math.round(v*100)}%`,
+  pop: v=>parseInt(v).toLocaleString(),
+  speed: v=>`${v}×`,
+};
 function updateVal(id) {
-  const el = document.getElementById(id);
-  const v = parseFloat(el.value);
+  const v = document.getElementById(id).value;
   document.getElementById(`${id}-val`).textContent = FORMAT[id](v);
 }
 
 function applyPreset() {
-  const key = document.getElementById('preset').value;
-  const p = PRESETS[key];
-  document.getElementById('beta').value = p.beta;
-  document.getElementById('sigma').value = p.sigma;
-  document.getElementById('gamma').value = p.gamma;
-  document.getElementById('mu').value = p.mu;
-  document.getElementById('pop').value = p.pop;
-  ['beta','sigma','gamma','mu','pop'].forEach(updateVal);
-  document.getElementById('status-bar').innerHTML = `<em>${p.label}</em>`;
+  const p = PRESETS[document.getElementById('preset').value];
+  for (const [k,v] of Object.entries(p)) {
+    document.getElementById(k).value = v;
+    updateVal(k);
+  }
 }
 
 function startSim() {
-  if (running) return;
-  if (day === 0) {
-    initAgents();
-    chartHistory = [];
-  }
-  running = true;
+  if (simMode !== 'idle') return;
+  setupMap();
+  initAgents();
+  snapshots = [];
+  logEvent('Simulation initialized. Patient Zero spawned in Zul\'Gurub.','info');
+  simMode = 'playing';
+  updateModeUI();
   animId = requestAnimationFrame(loop);
 }
 
 function resetSim() {
-  running = false;
+  simMode = 'idle';
+  reviewDay = null;
   cancelAnimationFrame(animId);
-  day = 0;
-  agents = [];
-  chartHistory = [];
-  document.getElementById('day-display').textContent = '0';
-  ['s','e','i','r','d'].forEach(k => document.getElementById(`${k}-count`).textContent = '0');
-  document.getElementById('status-bar').textContent = 'Configure and begin the simulation.';
-  mctx.fillStyle = '#0d0b09';
-  mctx.fillRect(0, 0, mapW, mapH);
-  cctx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+  day=0; agents=[]; chartHistory=[]; snapshots=[]; loggedEvents.clear();
+  r0Estimate=0; infectionCountWindow=[];
+  ['s','e','i','r','d'].forEach(k=>document.getElementById(`${k}-count`).textContent='0');
+  document.getElementById('day-display').textContent='0';
+  document.getElementById('r0-display').textContent='—';
+  document.getElementById('r0-note').textContent='Average new infections per case';
+  document.getElementById('status-bar').textContent='Configure and begin the simulation.';
+  document.getElementById('event-log').innerHTML='';
+  document.getElementById('scrubber').value=0; document.getElementById('scrubber').max=0;
+  document.getElementById('scrubber-max').textContent='Day 0';
+  document.getElementById('scrubber-mid').textContent='';
+  updateModeUI();
+  setupMap();
+  drawEmptyMap();
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
+function setupMap() {
+  const c = document.getElementById('map-container');
+  mapW = c.clientWidth;
+  mapH = Math.max(300, Math.round(mapW * 0.5));
+  mapCanvas.width = mapW;
+  mapCanvas.height = mapH;
+  mapCanvas.style.height = mapH+'px';
+  cols = Math.floor(mapW / CELL);
+  rows = Math.floor(mapH / CELL);
+}
+
+function drawEmptyMap() {
+  mctx.fillStyle='#0d0b09';
+  mctx.fillRect(0,0,mapW,mapH);
+  for (const z of ZONES) {
+    mctx.fillStyle=z.color;
+    mctx.fillRect(z.x*mapW,z.y*mapH,z.w*mapW,z.h*mapH);
+    mctx.strokeStyle='rgba(201,168,76,0.1)';mctx.lineWidth=1;
+    mctx.strokeRect(z.x*mapW,z.y*mapH,z.w*mapW,z.h*mapH);
+    mctx.fillStyle='rgba(201,168,76,0.3)';mctx.font='10px Cinzel,serif';
+    mctx.fillText(z.name,z.x*mapW+5,z.y*mapH+13);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  setupMap();
-  setupChart();
+  buildBehaviorControls();
+  buildAgeControls();
+  buildAgeLiveGrid();
   ['beta','sigma','gamma','mu','pop','speed'].forEach(updateVal);
   applyPreset();
-
-  window.addEventListener('resize', () => {
-    setupMap();
-    setupChart();
-    if (agents.length) drawMap();
-  });
-
-  // Draw initial empty map
-  mctx.fillStyle = '#0d0b09';
-  mctx.fillRect(0, 0, mapW, mapH);
-  for (const z of COLS_ZONES) {
-    mctx.fillStyle = z.color;
-    mctx.fillRect(z.x * mapW, z.y * mapH, z.w * mapW, z.h * mapH);
-    mctx.strokeStyle = 'rgba(201,168,76,0.12)';
-    mctx.lineWidth = 1;
-    mctx.strokeRect(z.x * mapW, z.y * mapH, z.w * mapW, z.h * mapH);
-    mctx.fillStyle = 'rgba(201,168,76,0.35)';
-    mctx.font = '10px Cinzel, serif';
-    mctx.fillText(z.name, z.x * mapW + 6, z.y * mapH + 14);
-  }
+  setupMap();
+  drawEmptyMap();
+  window.addEventListener('resize', ()=>{ if(simMode==='idle'){ setupMap(); drawEmptyMap(); } });
 });
 </script>
 </body>
